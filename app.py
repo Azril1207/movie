@@ -1,11 +1,22 @@
-from http import client
 from flask import Flask, render_template, request, jsonify
-from pymongo import MongoClient
 import requests
 from bs4 import BeautifulSoup
+from pymongo import MongoClient
 
-client = MongoClient('mongodb://muhammadazril12:azril1207@ac-lqxz0lj-shard-00-00.sf6orbp.mongodb.net:27017,ac-lqxz0lj-shard-00-01.sf6orbp.mongodb.net:27017,ac-lqxz0lj-shard-00-02.sf6orbp.mongodb.net:27017/?ssl=true&replicaSet=atlas-s93fk0-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0')
+import os
+from os.path import join, dirname
+from dotenv import load_dotenv
+
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
+
+MONGODB_URI = os.environ.get("MONGODB_URI")
+DB_NAME =  os.environ.get("DB_NAME")
+
+client = MongoClient("mongodb://muhammadazril12:azril1207@ac-lqxz0lj-shard-00-00.sf6orbp.mongodb.net:27017,ac-lqxz0lj-shard-00-01.sf6orbp.mongodb.net:27017,ac-lqxz0lj-shard-00-02.sf6orbp.mongodb.net:27017/?ssl=true&replicaSet=atlas-s93fk0-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0")
 db = client.dbsparta
+
+
 
 app = Flask(__name__)
 
